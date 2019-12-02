@@ -6,8 +6,6 @@ Springboard' online SQL platform, which you can log into through the
 following link:
 
 https://sql.springboard.com/
-Username: student
-Password: learn_sql@springboard
 
 The data you need is in the "country_club" database. This database
 contains 3 tables:
@@ -30,6 +28,8 @@ exploring the data, and getting acquainted with the 3 tables. */
 /* Q1: Some of the facilities charge a fee to members, but some do not.
 Please list the names of the facilities that do. */
 
+
+
 SELECT name, membercost
 FROM
 country_club.Facilities
@@ -37,7 +37,11 @@ WHERE
 membercost = 0;
 
 
+
+
 /* Q2: How many facilities do not charge a fee to members? */
+
+
 
 SELECT COUNT(*) FROM
 country_club.Facilities
@@ -45,6 +49,8 @@ WHERE
 membercost = 0;
 
 /* Ans: 4 */
+
+
 
 
 /* Q3: How can you produce a list of facilities that charge a fee to members,
@@ -58,6 +64,9 @@ Return the
  
  of the
 facilities in question. */
+
+
+
 
 SELECT facid, name, membercost, monthlymaintenance
 
@@ -73,12 +82,19 @@ facid
 /* Q4: How can you retrieve the details of facilities with ID 1 and 5?
 Write the query without using the OR operator. */
 
+
+
+
 SELECT
 *
 FROM
 country_club.Facilities
 WHERE
 facid IN (1,5);
+
+
+
+
 
 /* Q5: How can you produce a list of facilities, with each labelled as
 
@@ -89,6 +105,10 @@ facid IN (1,5);
 depending on if their monthly maintenance cost is
 more than $100? Return the name and monthly maintenance of the facilities
 in question. */
+
+
+
+
 
 SELECT
 country_club.Facilities.name,
@@ -108,6 +128,9 @@ country_club.Facilities
 who signed up. Do not use the LIMIT clause for your solution.
 from country_club.Members */
 
+
+
+
 SELECT surname, firstname,
 
 MAX(joindate)
@@ -115,10 +138,18 @@ MAX(joindate)
 FROM country_club.Members
 
 
+
+
+
+
 /* Q7: How can you produce a list of all members who have used a tennis court?
 Include in your output the name of the court, and the name of the member
 formatted as a single column. Ensure no duplicate data, and order by
 the member name. */
+
+
+
+
 
 SELECT        country_club.Bookings.memid,
 country_club.Facilities.name,
@@ -138,12 +169,19 @@ WHERE        name like 'Tennis Court %'
 GROUP BY fullname LIMIT 0,10
 
 
+
+
+
 /* Q8: How can you produce a list of bookings on the day of 2012-09-14 which
 will cost the member (or guest) more than $30? Remember that guests have
 different costs to members (the listed costs are per half-hour 'slot'), and
 the guest user's ID is always 0. Include in your output the name of the
 facility, the name of the member formatted as a single column, and the cost.
 Order by descending cost, and do not use any subqueries. */
+
+
+
+
 
 select country_club.Bookings.memid, country_club.Bookings.starttime,
 country_club.Facilities.name,
@@ -160,7 +198,13 @@ and (Facilities.membercost*Bookings.slots+Facilities.guestcost*Bookings.slots)>3
 group by memid limit 0,5
 
 
+
+
+
 /* Q9: This time, produce the same result as in Q8, but using a subquery. */
+
+
+
 
 SELECT     bkfc.starttime, bkfc.memid,
 CONCAT(Members.firstname, ' ', Members.surname) AS fullname,
@@ -190,9 +234,15 @@ limit 0, 5
 
 
 
+
+
 /* Q10: Produce a list of facilities with a total revenue less than 1000.
 The output of facility name and total revenue, sorted by revenue. Remember
 that there's a different cost for guests and members! */
+
+
+
+
 
 USE country_club;
 SELECT
